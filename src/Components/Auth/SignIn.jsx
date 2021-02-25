@@ -141,16 +141,16 @@ class SignIn extends Component {
                                                onChange={this.handleCheckbox}/>}
                             label="Remember me"
                         />
-                        {!isProduction && (
+                        {//!isProduction && (
                             <Button type="submit" variant="contained" onClick={this.Test1}>
                                 Tester 1
                             </Button>
-                        )}
-                        {!isProduction && (
+                        }
+                        {//!isProduction && (
                             <Button type="submit" variant="contained" onClick={this.Test2}>
                                 Tester 2
                             </Button>
-                        )}
+                        }
                         <Button
                             disabled={isInvalid}
                             type="submit"
