@@ -55,7 +55,7 @@ class PlayerDisplay extends React.Component {
       updateExtendedGameState
     } = this.props;
     if (!isPlayer && opponentName === "") {
-      firebase.setOpponentUsername(opponentUserId, updateExtendedGameState);
+      //firebase.setOpponentUsername(opponentUserId, updateExtendedGameState);
     }
   }
 

@@ -20,6 +20,12 @@ export class GameProtoSocket {
             debugPrint('[recvGameMsg]', msg);
             msgHandler(capitalize(msg.payload), msg[msg.payload]);
         };
+        this.socket.onerror = function(event) {
+            console.error("GameWebSocket error observed:", event);
+        };
+        this.socket.onclose = function(event) {
+            console.error("GameWebSocket closed:", event);
+        };
     }
 
     waitForOpen = (bytes, waitCount = 0) => {
@@ -61,6 +67,12 @@ export class ProtoSocket {
             const msg = proto.ServerMessage.decode(new Uint8Array(event.data));
             debugPrint('[recvMsg]', msg);
             msgHandler(capitalize(msg.payload), msg[msg.payload]);
+        };
+        this.socket.onerror = function(event) {
+            console.error("WebSocket error observed:", event);
+        };
+        this.socket.onclose = function(event) {
+            console.error("WebSocket closed:", event);
         };
     }
 

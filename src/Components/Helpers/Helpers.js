@@ -2,18 +2,7 @@ import proto from "../../protojs/compiled";
 import { ServerName, PrintDebug } from "../../Config.js";
 import {ClientPhase, knowledgeMap, fullCollection, specialCharacters} from "./Constants";
 
-export function GetProfileURL(userId) {
-  return `ws://${ServerName}/profiles/${userId}`;
-}
 
-export function GetGameURL(userId, gameID, gameType) {
-  switch(gameType){
-    case proto.GameType.BO1_CONSTRUCTED:
-      return `ws://${ServerName}/games/${userId}/${gameID}`;
-    case proto.GameType.P2_DRAFT:
-      return `ws://${ServerName}/drafts/${userId}/${gameID}`;
-  }
-}
 
 export function toDeck(decklist) {
   let deck = {}

@@ -35,19 +35,6 @@ class Void extends Component {
     }));
   };
 
-  componentDidMount() {
-    const {
-      isPlayer,
-      opponentName,
-      opponentUserId,
-      firebase,
-      updateExtendedGameState
-    } = this.props;
-    if (!isPlayer && opponentName === "") {
-      firebase.setOpponentUsername(opponentUserId, updateExtendedGameState);
-    }
-  }
-
   displayVoid = event => {
     const {
       playerName,

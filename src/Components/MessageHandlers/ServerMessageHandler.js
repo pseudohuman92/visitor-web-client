@@ -1,6 +1,6 @@
 // Handles ServerMessage messages.
 import {ProtoSocket} from "../../protojs/ProtoSocket.js";
-import {GetProfileURL} from "../Helpers/Helpers";
+import {GetProfileURL} from "../Helpers/URLS";
 import ServerGameMessageHandler from "./ServerGameMessageHandler";
 import * as proto from "../../protojs/compiled";
 
@@ -12,6 +12,7 @@ export default class ServerMessageHandler {
         this.updateExtendedGameState = updateExtendedGameState;
         this.gameId = "";
         this.playerId = "";
+        this.aiId = "";
         this.callback = callback;
     }
 
@@ -36,11 +37,13 @@ export default class ServerMessageHandler {
             case "NewGame":
                 this.gameId = params.game.id;
                 this.playerId = params.game.player.id;
+                this.aiId = params.aiId;
                 this.updateHandlers({
                     gameHandler: new ServerGameMessageHandler(
                         this.playerId,
                         this.gameId,
-                        proto.GameType.BO1_CONSTRUCTED,
+                        this.aiId,
+                        (this.aiId ? proto.GameType.AI_BO1_CONSTRUCTED : proto.GameType.BO1_CONSTRUCTED),
                         this.updateExtendedGameState,
                         false
                     )
@@ -75,18 +78,4 @@ export default class ServerMessageHandler {
             draftId: draftId,
         });
     };
-
-    /*
-      RegisterGameConnection = () => {
-        this.protoSocket.send("RegisterGameConnection", {
-          gameID: this.gameId,
-        });
-      };
-
-      LoadGame = (filename) => {
-        this.protoSocket.send("LoadGame", {
-          filename: filename,
-        });
-      };
-     */
 }

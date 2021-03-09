@@ -31,19 +31,6 @@ class DiscardPile extends React.Component {
     }));
   };
 
-  componentDidMount() {
-    const {
-      isPlayer,
-      opponentName,
-      opponentUserId,
-      firebase,
-      updateExtendedGameState
-    } = this.props;
-    if (!isPlayer && opponentName === "") {
-      firebase.setOpponentUsername(opponentUserId, updateExtendedGameState);
-    }
-  }
-
   render() {
     const {
       windowDimensions,

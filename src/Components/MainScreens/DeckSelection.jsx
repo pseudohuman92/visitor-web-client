@@ -25,7 +25,8 @@ class DeckSelection extends React.Component {
     super(props);
     this.state = {
       decks: [],
-      message: ""
+      message: "",
+      gameType: proto.GameType.BO1_CONSTRUCTED
     };
   }
 
@@ -44,17 +45,11 @@ class DeckSelection extends React.Component {
     debugPrint(deck);
     const decklist = toDecklist(deck);
     if (decklist) {
-      this.props.serverHandler.joinQueue(proto.GameType.BO1_CONSTRUCTED, decklist);
+      this.props.serverHandler.joinQueue(this.state.gameType, decklist);
       this.setState({message: "JOINED" });
     } else {
       this.setState({message: "Invalid Deck" });
     }
-  };
-
-  loadGame = event => {
-    debugPrint("Loading Game");
-    this.props.serverHandler.LoadGame("test_save");
-    this.setState({message: "", value: 1 });
   };
 
   joinQueue = deckId => {
@@ -71,6 +66,24 @@ class DeckSelection extends React.Component {
         {/*!isProduction && <Button onClick={this.loadGame} text="Load"/> */}
           {//If there is a joined game, go to there
             message === "JOINED" && <Redirect to={"/profile/play/game"}/>}
+          <Grid container spacing={8} style={{color: "white"}}>
+            <Grid
+                item
+                xs={2}
+            >
+              <Button text={"vs Player"}
+                    disabled={this.state.gameType === proto.GameType.BO1_CONSTRUCTED}
+            onClick={event => this.setState({gameType: proto.GameType.BO1_CONSTRUCTED})}/>
+            </Grid>
+            <Grid
+                item
+                xs={2}
+            >
+            <Button text={"vs AI"}
+                    disabled={this.state.gameType === proto.GameType.AI_BO1_CONSTRUCTED}
+                    onClick={event => this.setState({gameType: proto.GameType.AI_BO1_CONSTRUCTED})}/>
+            </Grid>
+          </Grid>
             <Grid container spacing={8} style={{color: "white"}}>
               {decks.map((deck, i) => (
                 <Grid

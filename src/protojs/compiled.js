@@ -2895,193 +2895,6 @@ $root.PickCardResponse = (function() {
     return PickCardResponse;
 })();
 
-$root.SaveGameState = (function() {
-
-    /**
-     * Properties of a SaveGameState.
-     * @exports ISaveGameState
-     * @interface ISaveGameState
-     * @property {string|null} [filename] SaveGameState filename
-     */
-
-    /**
-     * Constructs a new SaveGameState.
-     * @exports SaveGameState
-     * @classdesc Represents a SaveGameState.
-     * @implements ISaveGameState
-     * @constructor
-     * @param {ISaveGameState=} [properties] Properties to set
-     */
-    function SaveGameState(properties) {
-        if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                if (properties[keys[i]] != null)
-                    this[keys[i]] = properties[keys[i]];
-    }
-
-    /**
-     * SaveGameState filename.
-     * @member {string} filename
-     * @memberof SaveGameState
-     * @instance
-     */
-    SaveGameState.prototype.filename = "";
-
-    /**
-     * Creates a new SaveGameState instance using the specified properties.
-     * @function create
-     * @memberof SaveGameState
-     * @static
-     * @param {ISaveGameState=} [properties] Properties to set
-     * @returns {SaveGameState} SaveGameState instance
-     */
-    SaveGameState.create = function create(properties) {
-        return new SaveGameState(properties);
-    };
-
-    /**
-     * Encodes the specified SaveGameState message. Does not implicitly {@link SaveGameState.verify|verify} messages.
-     * @function encode
-     * @memberof SaveGameState
-     * @static
-     * @param {ISaveGameState} message SaveGameState message or plain object to encode
-     * @param {$protobuf.Writer} [writer] Writer to encode to
-     * @returns {$protobuf.Writer} Writer
-     */
-    SaveGameState.encode = function encode(message, writer) {
-        if (!writer)
-            writer = $Writer.create();
-        if (message.filename != null && Object.hasOwnProperty.call(message, "filename"))
-            writer.uint32(/* id 1, wireType 2 =*/10).string(message.filename);
-        return writer;
-    };
-
-    /**
-     * Encodes the specified SaveGameState message, length delimited. Does not implicitly {@link SaveGameState.verify|verify} messages.
-     * @function encodeDelimited
-     * @memberof SaveGameState
-     * @static
-     * @param {ISaveGameState} message SaveGameState message or plain object to encode
-     * @param {$protobuf.Writer} [writer] Writer to encode to
-     * @returns {$protobuf.Writer} Writer
-     */
-    SaveGameState.encodeDelimited = function encodeDelimited(message, writer) {
-        return this.encode(message, writer).ldelim();
-    };
-
-    /**
-     * Decodes a SaveGameState message from the specified reader or buffer.
-     * @function decode
-     * @memberof SaveGameState
-     * @static
-     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-     * @param {number} [length] Message length if known beforehand
-     * @returns {SaveGameState} SaveGameState
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    SaveGameState.decode = function decode(reader, length) {
-        if (!(reader instanceof $Reader))
-            reader = $Reader.create(reader);
-        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SaveGameState();
-        while (reader.pos < end) {
-            var tag = reader.uint32();
-            switch (tag >>> 3) {
-            case 1:
-                message.filename = reader.string();
-                break;
-            default:
-                reader.skipType(tag & 7);
-                break;
-            }
-        }
-        return message;
-    };
-
-    /**
-     * Decodes a SaveGameState message from the specified reader or buffer, length delimited.
-     * @function decodeDelimited
-     * @memberof SaveGameState
-     * @static
-     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-     * @returns {SaveGameState} SaveGameState
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    SaveGameState.decodeDelimited = function decodeDelimited(reader) {
-        if (!(reader instanceof $Reader))
-            reader = new $Reader(reader);
-        return this.decode(reader, reader.uint32());
-    };
-
-    /**
-     * Verifies a SaveGameState message.
-     * @function verify
-     * @memberof SaveGameState
-     * @static
-     * @param {Object.<string,*>} message Plain object to verify
-     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-     */
-    SaveGameState.verify = function verify(message) {
-        if (typeof message !== "object" || message === null)
-            return "object expected";
-        if (message.filename != null && message.hasOwnProperty("filename"))
-            if (!$util.isString(message.filename))
-                return "filename: string expected";
-        return null;
-    };
-
-    /**
-     * Creates a SaveGameState message from a plain object. Also converts values to their respective internal types.
-     * @function fromObject
-     * @memberof SaveGameState
-     * @static
-     * @param {Object.<string,*>} object Plain object
-     * @returns {SaveGameState} SaveGameState
-     */
-    SaveGameState.fromObject = function fromObject(object) {
-        if (object instanceof $root.SaveGameState)
-            return object;
-        var message = new $root.SaveGameState();
-        if (object.filename != null)
-            message.filename = String(object.filename);
-        return message;
-    };
-
-    /**
-     * Creates a plain object from a SaveGameState message. Also converts values to other types if specified.
-     * @function toObject
-     * @memberof SaveGameState
-     * @static
-     * @param {SaveGameState} message SaveGameState
-     * @param {$protobuf.IConversionOptions} [options] Conversion options
-     * @returns {Object.<string,*>} Plain object
-     */
-    SaveGameState.toObject = function toObject(message, options) {
-        if (!options)
-            options = {};
-        var object = {};
-        if (options.defaults)
-            object.filename = "";
-        if (message.filename != null && message.hasOwnProperty("filename"))
-            object.filename = message.filename;
-        return object;
-    };
-
-    /**
-     * Converts this SaveGameState to JSON.
-     * @function toJSON
-     * @memberof SaveGameState
-     * @instance
-     * @returns {Object.<string,*>} JSON object
-     */
-    SaveGameState.prototype.toJSON = function toJSON() {
-        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-    };
-
-    return SaveGameState;
-})();
-
 $root.ClientGameMessage = (function() {
 
     /**
@@ -3100,7 +2913,6 @@ $root.ClientGameMessage = (function() {
      * @property {ISelectXValueResponse|null} [selectXValueResponse] ClientGameMessage selectXValueResponse
      * @property {ISelectAttackersResponse|null} [selectAttackersResponse] ClientGameMessage selectAttackersResponse
      * @property {ISelectBlockersResponse|null} [selectBlockersResponse] ClientGameMessage selectBlockersResponse
-     * @property {ISaveGameState|null} [saveGameState] ClientGameMessage saveGameState
      * @property {IAssignDamageResponse|null} [assignDamageResponse] ClientGameMessage assignDamageResponse
      * @property {ISelectKnowledgeResponse|null} [selectKnowledgeResponse] ClientGameMessage selectKnowledgeResponse
      * @property {IPickCardResponse|null} [pickCardResponse] ClientGameMessage pickCardResponse
@@ -3218,14 +3030,6 @@ $root.ClientGameMessage = (function() {
     ClientGameMessage.prototype.selectBlockersResponse = null;
 
     /**
-     * ClientGameMessage saveGameState.
-     * @member {ISaveGameState|null|undefined} saveGameState
-     * @memberof ClientGameMessage
-     * @instance
-     */
-    ClientGameMessage.prototype.saveGameState = null;
-
-    /**
      * ClientGameMessage assignDamageResponse.
      * @member {IAssignDamageResponse|null|undefined} assignDamageResponse
      * @memberof ClientGameMessage
@@ -3254,12 +3058,12 @@ $root.ClientGameMessage = (function() {
 
     /**
      * ClientGameMessage payload.
-     * @member {"playCard"|"activateCard"|"studyCard"|"pass"|"redraw"|"keep"|"concede"|"orderCardsResponse"|"selectFromResponse"|"selectXValueResponse"|"selectAttackersResponse"|"selectBlockersResponse"|"saveGameState"|"assignDamageResponse"|"selectKnowledgeResponse"|"pickCardResponse"|undefined} payload
+     * @member {"playCard"|"activateCard"|"studyCard"|"pass"|"redraw"|"keep"|"concede"|"orderCardsResponse"|"selectFromResponse"|"selectXValueResponse"|"selectAttackersResponse"|"selectBlockersResponse"|"assignDamageResponse"|"selectKnowledgeResponse"|"pickCardResponse"|undefined} payload
      * @memberof ClientGameMessage
      * @instance
      */
     Object.defineProperty(ClientGameMessage.prototype, "payload", {
-        get: $util.oneOfGetter($oneOfFields = ["playCard", "activateCard", "studyCard", "pass", "redraw", "keep", "concede", "orderCardsResponse", "selectFromResponse", "selectXValueResponse", "selectAttackersResponse", "selectBlockersResponse", "saveGameState", "assignDamageResponse", "selectKnowledgeResponse", "pickCardResponse"]),
+        get: $util.oneOfGetter($oneOfFields = ["playCard", "activateCard", "studyCard", "pass", "redraw", "keep", "concede", "orderCardsResponse", "selectFromResponse", "selectXValueResponse", "selectAttackersResponse", "selectBlockersResponse", "assignDamageResponse", "selectKnowledgeResponse", "pickCardResponse"]),
         set: $util.oneOfSetter($oneOfFields)
     });
 
@@ -3311,8 +3115,6 @@ $root.ClientGameMessage = (function() {
             $root.SelectAttackersResponse.encode(message.selectAttackersResponse, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
         if (message.selectBlockersResponse != null && Object.hasOwnProperty.call(message, "selectBlockersResponse"))
             $root.SelectBlockersResponse.encode(message.selectBlockersResponse, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
-        if (message.saveGameState != null && Object.hasOwnProperty.call(message, "saveGameState"))
-            $root.SaveGameState.encode(message.saveGameState, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
         if (message.assignDamageResponse != null && Object.hasOwnProperty.call(message, "assignDamageResponse"))
             $root.AssignDamageResponse.encode(message.assignDamageResponse, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
         if (message.selectKnowledgeResponse != null && Object.hasOwnProperty.call(message, "selectKnowledgeResponse"))
@@ -3388,9 +3190,6 @@ $root.ClientGameMessage = (function() {
                 break;
             case 25:
                 message.selectBlockersResponse = $root.SelectBlockersResponse.decode(reader, reader.uint32());
-                break;
-            case 26:
-                message.saveGameState = $root.SaveGameState.decode(reader, reader.uint32());
                 break;
             case 27:
                 message.assignDamageResponse = $root.AssignDamageResponse.decode(reader, reader.uint32());
@@ -3555,16 +3354,6 @@ $root.ClientGameMessage = (function() {
                     return "selectBlockersResponse." + error;
             }
         }
-        if (message.saveGameState != null && message.hasOwnProperty("saveGameState")) {
-            if (properties.payload === 1)
-                return "payload: multiple values";
-            properties.payload = 1;
-            {
-                var error = $root.SaveGameState.verify(message.saveGameState);
-                if (error)
-                    return "saveGameState." + error;
-            }
-        }
         if (message.assignDamageResponse != null && message.hasOwnProperty("assignDamageResponse")) {
             if (properties.payload === 1)
                 return "payload: multiple values";
@@ -3670,11 +3459,6 @@ $root.ClientGameMessage = (function() {
                 throw TypeError(".ClientGameMessage.selectBlockersResponse: object expected");
             message.selectBlockersResponse = $root.SelectBlockersResponse.fromObject(object.selectBlockersResponse);
         }
-        if (object.saveGameState != null) {
-            if (typeof object.saveGameState !== "object")
-                throw TypeError(".ClientGameMessage.saveGameState: object expected");
-            message.saveGameState = $root.SaveGameState.fromObject(object.saveGameState);
-        }
         if (object.assignDamageResponse != null) {
             if (typeof object.assignDamageResponse !== "object")
                 throw TypeError(".ClientGameMessage.assignDamageResponse: object expected");
@@ -3766,11 +3550,6 @@ $root.ClientGameMessage = (function() {
             if (options.oneofs)
                 object.payload = "selectBlockersResponse";
         }
-        if (message.saveGameState != null && message.hasOwnProperty("saveGameState")) {
-            object.saveGameState = $root.SaveGameState.toObject(message.saveGameState, options);
-            if (options.oneofs)
-                object.payload = "saveGameState";
-        }
         if (message.assignDamageResponse != null && message.hasOwnProperty("assignDamageResponse")) {
             object.assignDamageResponse = $root.AssignDamageResponse.toObject(message.assignDamageResponse, options);
             if (options.oneofs)
@@ -3861,6 +3640,7 @@ $root.SelectFromType = (function() {
  * @property {number} BO1_CONSTRUCTED=1 BO1_CONSTRUCTED value
  * @property {number} P2_DRAFT=2 P2_DRAFT value
  * @property {number} P2_DRAFT_GAME=3 P2_DRAFT_GAME value
+ * @property {number} AI_BO1_CONSTRUCTED=4 AI_BO1_CONSTRUCTED value
  */
 $root.GameType = (function() {
     var valuesById = {}, values = Object.create(valuesById);
@@ -3868,6 +3648,7 @@ $root.GameType = (function() {
     values[valuesById[1] = "BO1_CONSTRUCTED"] = 1;
     values[valuesById[2] = "P2_DRAFT"] = 2;
     values[valuesById[3] = "P2_DRAFT_GAME"] = 3;
+    values[valuesById[4] = "AI_BO1_CONSTRUCTED"] = 4;
     return values;
 })();
 
@@ -8313,6 +8094,7 @@ $root.JoinQueue = (function() {
             case 1:
             case 2:
             case 3:
+            case 4:
                 break;
             }
         if (message.draftId != null && message.hasOwnProperty("draftId"))
@@ -8356,6 +8138,10 @@ $root.JoinQueue = (function() {
         case "P2_DRAFT_GAME":
         case 3:
             message.gameType = 3;
+            break;
+        case "AI_BO1_CONSTRUCTED":
+        case 4:
+            message.gameType = 4;
             break;
         }
         if (object.draftId != null)
@@ -12403,6 +12189,8 @@ $root.NewGame = (function() {
      * @exports INewGame
      * @interface INewGame
      * @property {IGameState|null} [game] NewGame game
+     * @property {GameType|null} [gameType] NewGame gameType
+     * @property {string|null} [aiId] NewGame aiId
      */
 
     /**
@@ -12427,6 +12215,22 @@ $root.NewGame = (function() {
      * @instance
      */
     NewGame.prototype.game = null;
+
+    /**
+     * NewGame gameType.
+     * @member {GameType} gameType
+     * @memberof NewGame
+     * @instance
+     */
+    NewGame.prototype.gameType = 0;
+
+    /**
+     * NewGame aiId.
+     * @member {string} aiId
+     * @memberof NewGame
+     * @instance
+     */
+    NewGame.prototype.aiId = "";
 
     /**
      * Creates a new NewGame instance using the specified properties.
@@ -12454,6 +12258,10 @@ $root.NewGame = (function() {
             writer = $Writer.create();
         if (message.game != null && Object.hasOwnProperty.call(message, "game"))
             $root.GameState.encode(message.game, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+        if (message.gameType != null && Object.hasOwnProperty.call(message, "gameType"))
+            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.gameType);
+        if (message.aiId != null && Object.hasOwnProperty.call(message, "aiId"))
+            writer.uint32(/* id 3, wireType 2 =*/26).string(message.aiId);
         return writer;
     };
 
@@ -12490,6 +12298,12 @@ $root.NewGame = (function() {
             switch (tag >>> 3) {
             case 1:
                 message.game = $root.GameState.decode(reader, reader.uint32());
+                break;
+            case 2:
+                message.gameType = reader.int32();
+                break;
+            case 3:
+                message.aiId = reader.string();
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -12531,6 +12345,20 @@ $root.NewGame = (function() {
             if (error)
                 return "game." + error;
         }
+        if (message.gameType != null && message.hasOwnProperty("gameType"))
+            switch (message.gameType) {
+            default:
+                return "gameType: enum value expected";
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                break;
+            }
+        if (message.aiId != null && message.hasOwnProperty("aiId"))
+            if (!$util.isString(message.aiId))
+                return "aiId: string expected";
         return null;
     };
 
@@ -12551,6 +12379,30 @@ $root.NewGame = (function() {
                 throw TypeError(".NewGame.game: object expected");
             message.game = $root.GameState.fromObject(object.game);
         }
+        switch (object.gameType) {
+        case "NOGAME":
+        case 0:
+            message.gameType = 0;
+            break;
+        case "BO1_CONSTRUCTED":
+        case 1:
+            message.gameType = 1;
+            break;
+        case "P2_DRAFT":
+        case 2:
+            message.gameType = 2;
+            break;
+        case "P2_DRAFT_GAME":
+        case 3:
+            message.gameType = 3;
+            break;
+        case "AI_BO1_CONSTRUCTED":
+        case 4:
+            message.gameType = 4;
+            break;
+        }
+        if (object.aiId != null)
+            message.aiId = String(object.aiId);
         return message;
     };
 
@@ -12567,10 +12419,17 @@ $root.NewGame = (function() {
         if (!options)
             options = {};
         var object = {};
-        if (options.defaults)
+        if (options.defaults) {
             object.game = null;
+            object.gameType = options.enums === String ? "NOGAME" : 0;
+            object.aiId = "";
+        }
         if (message.game != null && message.hasOwnProperty("game"))
             object.game = $root.GameState.toObject(message.game, options);
+        if (message.gameType != null && message.hasOwnProperty("gameType"))
+            object.gameType = options.enums === String ? $root.GameType[message.gameType] : message.gameType;
+        if (message.aiId != null && message.hasOwnProperty("aiId"))
+            object.aiId = message.aiId;
         return object;
     };
 

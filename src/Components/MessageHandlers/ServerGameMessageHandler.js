@@ -7,8 +7,8 @@ import {
     initialDamageAssignmentData,
     initialDialogData
 } from "../Helpers/Constants";
-import {sleep, toClientPhase, toSelectFromType} from "../Helpers/Helpers";
-import {GetGameURL} from "../Helpers/Helpers";
+import {toClientPhase, toSelectFromType} from "../Helpers/Helpers";
+import {GetGameURL} from "../Helpers/URLS";
 import {Phase} from "../../protojs/compiled";
 
 export default class ServerGameMessageHandler {
@@ -16,6 +16,7 @@ export default class ServerGameMessageHandler {
     constructor(
         userId,
         gameId,
+        aiId,
         gameType,
         updateExtendedGameState,
         continueGame
@@ -23,9 +24,11 @@ export default class ServerGameMessageHandler {
         this.userId = userId;
         this.updateExtendedGameState = updateExtendedGameState;
         this.gameId = gameId;
+        this.aiId = aiId;
         this.continueGame = continueGame;
+        this.gameType = gameType;
         this.protoSocket = new GameProtoSocket(
-            GetGameURL(userId, gameId, gameType),
+            GetGameURL(userId, gameId, aiId, gameType),
             this.handleMsg
         );
     }

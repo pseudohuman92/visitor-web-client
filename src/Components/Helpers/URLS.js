@@ -1,3 +1,23 @@
+import {ServerName} from "../../Config";
+import proto from "../../protojs/compiled";
+
+export function GetProfileURL(userId) {
+    return `ws://${ServerName}/profiles/${userId}`;
+}
+
+export function GetGameURL(userId, gameID, aiId, gameType) {
+    switch(gameType){
+        case proto.GameType.AI_BO1_CONSTRUCTED:
+            return `ws://${ServerName}/ai/${userId}/${gameID}/${aiId}`;
+        case proto.GameType.BO1_CONSTRUCTED:
+            return `ws://${ServerName}/games/${userId}/${gameID}`;
+        case proto.GameType.P2_DRAFT:
+            return `ws://${ServerName}/drafts/${userId}/${gameID}`;
+    }
+}
+
+
+
 export const cardBackURL = process.env.PUBLIC_URL + "/img/card-backs/card-back-3.png";
 
 export const knowledgeIconURLs =

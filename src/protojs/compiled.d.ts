@@ -1331,96 +1331,6 @@ export class PickCardResponse implements IPickCardResponse {
     public toJSON(): { [k: string]: any };
 }
 
-/** Properties of a SaveGameState. */
-export interface ISaveGameState {
-
-    /** SaveGameState filename */
-    filename?: (string|null);
-}
-
-/** Represents a SaveGameState. */
-export class SaveGameState implements ISaveGameState {
-
-    /**
-     * Constructs a new SaveGameState.
-     * @param [properties] Properties to set
-     */
-    constructor(properties?: ISaveGameState);
-
-    /** SaveGameState filename. */
-    public filename: string;
-
-    /**
-     * Creates a new SaveGameState instance using the specified properties.
-     * @param [properties] Properties to set
-     * @returns SaveGameState instance
-     */
-    public static create(properties?: ISaveGameState): SaveGameState;
-
-    /**
-     * Encodes the specified SaveGameState message. Does not implicitly {@link SaveGameState.verify|verify} messages.
-     * @param message SaveGameState message or plain object to encode
-     * @param [writer] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(message: ISaveGameState, writer?: $protobuf.Writer): $protobuf.Writer;
-
-    /**
-     * Encodes the specified SaveGameState message, length delimited. Does not implicitly {@link SaveGameState.verify|verify} messages.
-     * @param message SaveGameState message or plain object to encode
-     * @param [writer] Writer to encode to
-     * @returns Writer
-     */
-    public static encodeDelimited(message: ISaveGameState, writer?: $protobuf.Writer): $protobuf.Writer;
-
-    /**
-     * Decodes a SaveGameState message from the specified reader or buffer.
-     * @param reader Reader or buffer to decode from
-     * @param [length] Message length if known beforehand
-     * @returns SaveGameState
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SaveGameState;
-
-    /**
-     * Decodes a SaveGameState message from the specified reader or buffer, length delimited.
-     * @param reader Reader or buffer to decode from
-     * @returns SaveGameState
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SaveGameState;
-
-    /**
-     * Verifies a SaveGameState message.
-     * @param message Plain object to verify
-     * @returns `null` if valid, otherwise the reason why it is not
-     */
-    public static verify(message: { [k: string]: any }): (string|null);
-
-    /**
-     * Creates a SaveGameState message from a plain object. Also converts values to their respective internal types.
-     * @param object Plain object
-     * @returns SaveGameState
-     */
-    public static fromObject(object: { [k: string]: any }): SaveGameState;
-
-    /**
-     * Creates a plain object from a SaveGameState message. Also converts values to other types if specified.
-     * @param message SaveGameState
-     * @param [options] Conversion options
-     * @returns Plain object
-     */
-    public static toObject(message: SaveGameState, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-    /**
-     * Converts this SaveGameState to JSON.
-     * @returns JSON object
-     */
-    public toJSON(): { [k: string]: any };
-}
-
 /** Properties of a ClientGameMessage. */
 export interface IClientGameMessage {
 
@@ -1459,9 +1369,6 @@ export interface IClientGameMessage {
 
     /** ClientGameMessage selectBlockersResponse */
     selectBlockersResponse?: (ISelectBlockersResponse|null);
-
-    /** ClientGameMessage saveGameState */
-    saveGameState?: (ISaveGameState|null);
 
     /** ClientGameMessage assignDamageResponse */
     assignDamageResponse?: (IAssignDamageResponse|null);
@@ -1518,9 +1425,6 @@ export class ClientGameMessage implements IClientGameMessage {
     /** ClientGameMessage selectBlockersResponse. */
     public selectBlockersResponse?: (ISelectBlockersResponse|null);
 
-    /** ClientGameMessage saveGameState. */
-    public saveGameState?: (ISaveGameState|null);
-
     /** ClientGameMessage assignDamageResponse. */
     public assignDamageResponse?: (IAssignDamageResponse|null);
 
@@ -1531,7 +1435,7 @@ export class ClientGameMessage implements IClientGameMessage {
     public pickCardResponse?: (IPickCardResponse|null);
 
     /** ClientGameMessage payload. */
-    public payload?: ("playCard"|"activateCard"|"studyCard"|"pass"|"redraw"|"keep"|"concede"|"orderCardsResponse"|"selectFromResponse"|"selectXValueResponse"|"selectAttackersResponse"|"selectBlockersResponse"|"saveGameState"|"assignDamageResponse"|"selectKnowledgeResponse"|"pickCardResponse");
+    public payload?: ("playCard"|"activateCard"|"studyCard"|"pass"|"redraw"|"keep"|"concede"|"orderCardsResponse"|"selectFromResponse"|"selectXValueResponse"|"selectAttackersResponse"|"selectBlockersResponse"|"assignDamageResponse"|"selectKnowledgeResponse"|"pickCardResponse");
 
     /**
      * Creates a new ClientGameMessage instance using the specified properties.
@@ -1632,7 +1536,8 @@ export enum GameType {
     NOGAME = 0,
     BO1_CONSTRUCTED = 1,
     P2_DRAFT = 2,
-    P2_DRAFT_GAME = 3
+    P2_DRAFT_GAME = 3,
+    AI_BO1_CONSTRUCTED = 4
 }
 
 /** Represents a Table. */
@@ -4351,6 +4256,12 @@ export class NewGame implements INewGame {
 
     /** NewGame game. */
     public game?: (IGameState|null);
+
+    /** NewGame gameType. */
+    public gameType: GameType;
+
+    /** NewGame aiId. */
+    public aiId: string;
 
     /**
      * Creates a new NewGame instance using the specified properties.
